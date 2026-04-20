@@ -55,7 +55,7 @@ It automates placement workflows including company approvals, job postings, stud
 
 ---
 
-### 🏢 Company Functionalities
+### Company Functionalities
 - Register and manage profile  
 - Login after admin approval  
 - Create, edit, delete, and close placement drives  
