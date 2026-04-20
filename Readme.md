@@ -1,9 +1,9 @@
 # Placement Portal Application
 The Goal of this project was to develop a web-based platform that streamlines and manages campus recruitment activities for institutes, companies, and students.
 
-```NOTE
-This project is just a prototype and not under active development
-```
+###NOTE
+> This project is just a prototype and not under active development
+
 
 ---
 
