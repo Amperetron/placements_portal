@@ -103,7 +103,7 @@ It automates placement workflows including company approvals, job postings, stud
 
 ---
 
-## Installation & Setup
+# Installation & Setup
 
 ```bash
 # Clone repository
@@ -114,7 +114,7 @@ cd placement-portal
 
 # Install dependencies
 pip install -r requirements.txt
-```
 
 # Run the application
 python app.py
+```
