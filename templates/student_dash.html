@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock title %}
+{% block welcome %}
+{% endblock welcome %}
+{% block navbar %}
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <a class="navbar-brand" href="#">Welcome {{current_user.name}}</a>
+      </ul>
+        <a class="btn btn-secondary btn-sm me-2" href="{{url_for('edit_profile')}}">Edit Profile</a>
+        <a class="btn btn-primary btn-sm me-2" href="{{url_for('history_data')}}">View History</a>
+        <a class="btn btn-danger btn-sm" href="{{ url_for('logout') }}">Logout</a>
+    </div>
+  </div>
+</nav>
+{% endblock navbar %}
+{% block body %}
+<div class="d-flex justify-content-center gap-3">
+  <div class="card shadow " style="width: 20rem; height:20rem;">
+    <div class="card-body">
+      <h1>Profile</h1>
+      <h4 class="card-title">Name: {{current_user.name}}</h4>
+      <h5 class="card-subtitle mb-2 text-body-secondary">Email: {{current_user.email}}</h5>
+      <h5 class="card-title">Contact No: {{current_user.student.sphone}}</h5>
+      <h5 class="card-title">Department: {{current_user.student.sdept}}</h5>
+      <h5 class="card-title">CGPA: {{current_user.student.scgpa}}</h5>
+      <a href="{{ url_for('view_resume',student_id=current_user.student.id)}}" class="btn btn-primary btn-sm">
+        View Resume
+      </a>
+    </div>
+  </div>
+   <div class="card shadow" style="width: 20rem; height:10rem;">
+    <div class="card-body my-2">
+      <h1>Total Drives</h1>
+      <h2>{{ drives|length }}</h2>
+    </div>
+   </div>
+   <div class="card shadow" style="width: 20rem; height:10rem;">
+    <div class="card-body my-2">
+      <h1>Applied Drives</h1>
+      <h2>{{applied_job_ids|length}}</h2>
+    </div>
+   </div>
+</div>
+
+<div class="container my-2">
+  <h1>Active Drives</h1>
+<table class="table table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Company</th>
+      <th scope="col">Job Title</th>
+      <th scope="col">Deadline</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for drive in drives %}
+    <tr class="align-middle">
+    <td>{{drive.id}}</td>
+    <td>{{drive.company.user.name}}</td>
+    <td>{{drive.jtitle}}</td>
+    <td>{{drive.deadline}}</td>
+    <td>
+      <a class="btn btn-primary btn-sm" href="{{ url_for('view_drive',id=drive.id) }}">View Details</a>
+      {% if drive.id in applied_job_ids %}
+  <button class="btn btn-secondary btn-sm" disabled>Already Applied</button>
+{% else %}
+  <a href="{{ url_for('apply_drive', id=drive.id) }}" class="btn btn-success btn-sm">
+    Apply
+  </a>
+{% endif %}
+    </td>
+    {% endfor %}
+  </tr>
+</tbody>
+</table>
+</div>
+
+<div class="container my-2">
+  <h1>Applied Drives</h1>
+<table class="table table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Company</th>
+      <th scope="col">Job Title</th>
+      <th scope="col">Applied Date</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for drive in drives %}
+    <tr class="align-middle">
+    {% if drive.id in applied_job_ids and application_status[drive.id] == "applied" %}
+    <td>{{drive.id}}</td>
+    <td>{{drive.company.user.name}}</td>
+    <td>{{drive.jtitle}}</td>
+    <td>{{application_dates[drive.id]}}</td>
+    <td><a class="btn btn-primary btn-sm" href="{{ url_for('view_drive',id=drive.id) }}">View Details</a></td>
+{% endif %}
+    {% endfor %}
+  </tr>
+</tbody>
+</table>
+</div>
+{% endblock body %}

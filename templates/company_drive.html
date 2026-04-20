@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Drive Form{% endblock title %}
+{% block navbar %}{% endblock navbar %}
+{% block welcome %}{% endblock welcome %}
+{% block body %}
+<div class="container-fluid min-vh-80 d-flex justify-content-center align-items-center">
+    <div class="card p-4 border-0" style="width: 400px;">
+        <h1 class="text-center">Create a Drive</h1>
+        <form action="/company/drive" method="post">
+            <div class="mb-3">
+                <label for="exampleInputName" class="form-label">Job Title</label>
+                <input name="jtitle" type="text" class="form-control" id="exampleInputName"
+                    aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Job Description</label>
+                <textarea name="jdesc" type="text" rows="5" cols="5" class="form-control"
+                    id="exampleInputPassword1"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputName" class="form-label">Location</label>
+                <input name="location" type="text" class="form-control" id="exampleInputName"
+                    aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputName" class="form-label">Salary</label>
+                <input name="salary" type="text" class="form-control" id="exampleInputName"
+                    aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputName" class="form-label">Deadline</label>
+                <input name="deadline" type="date" class="form-control" id="exampleInputName"
+                    aria-describedby="emailHelp">
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-success" href="{{ url_for('company_dashboard') }}">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+{%endblock body%}

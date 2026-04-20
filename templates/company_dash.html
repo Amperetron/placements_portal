@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock title %}
+{% block welcome %}
+{% endblock welcome %}
+{% block navbar %}
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <a class="navbar-brand" href="#">Welcome {{current_user.name}}</a>
+      </ul>
+        <a class="btn btn-danger btn-sm" href="{{ url_for('logout') }}">Logout</a>
+    </div>
+  </div>
+</nav>
+{% endblock navbar %}
+{% block body %}
+
+<div class="container my-4">
+
+  <div class="d-flex justify-content-center mb-4 gap-3">
+    <div class="card shadow" style="width: 25rem;">
+      <div class="card-body text-center">
+        <h1>Profile</h1>
+        <h4>Company: {{current_user.name}}</h4>
+        <h5 class="text-muted">Email: {{current_user.email}}</h5>
+        <h5>HR Contact No: {{current_user.company.hrcontact}}</h5>
+        <h5>Website: {{current_user.company.cwebsite}}</h5>
+        <a href="{{ url_for('edit_profile_company') }}"class="btn btn-primary btn-sm mt-2">Edit Profile</a>
+      </div>
+    </div>
+    <div class="card shadow" style="width: 20rem; height:10rem;">
+    <div class="card-body my-2">
+      <h1>Total Drives</h1>
+      <h2>{{ drives|length }}</h2>
+    </div>
+   </div>
+   <div class="card shadow" style="width: 20rem; height:10rem;">
+    <div class="card-body my-2">
+      <h1>Total Applicants</h1>
+      <h2>{{ total_applicants }}</h2>
+    </div>
+   </div>
+</div>
+  </div>
+  
+
+ 
+  <div class="text-center mb-4">
+    <a class="btn btn-success" href="{{ url_for('company_drive') }}">
+      Create Drive
+    </a>
+  </div>
+
+  
+  <div class="container my-2">
+    <h1>Drives</h1>
+    <table class="table table-borderless">
+      <thead>
+        <tr>
+          <th>S No</th>
+          <th>Job Title</th>
+          <th>Status</th>
+          <th>No Of Applicants</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for drive in drives %}
+        <tr class="align-middle">
+          <td>{{loop.index}}</td>
+          <td>{{drive.jtitle}}</td>
+          <td>
+            {% if drive.status|lower == "pending" %}
+              <span class="text-secondary">Pending</span>
+            {% elif drive.status|lower == "approved" %}
+              <span class="text-success">Approved</span>
+            {% elif drive.status|lower == "rejected" %}
+              <span class="text-danger">Rejected</span>
+            {% elif drive.status|lower == "closed" %}
+              <span class="text-danger">Closed</span>
+            {% endif %}
+          </td>
+          <td>{{ drive.applications|length }}</td>
+          <td>
+            <a class="btn btn-primary btn-sm me-2" href="{{url_for('view_drive',id=drive.id)}}">View</a>
+
+            {% if drive.status|lower in ["pending", "rejected"] %}
+              <a class="btn btn-warning btn-sm me-2" href="{{ url_for('edit_drive',id=drive.id) }}">Edit</a>
+              <a class="btn btn-danger btn-sm me-2" href="{{ url_for('drive_delete',id=drive.id) }}">Delete</a>
+            {% elif drive.status|lower == "approved" %}
+              <a class="btn btn-info btn-sm me-2" href="{{ url_for('drive_applicants',id=drive.id) }}">Applicants</a>
+              <a class="btn btn-danger btn-sm me-2" href="{{ url_for('close_drive', id=drive.id) }}">Close</a>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+{% endblock body %}

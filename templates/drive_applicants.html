@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock title %}
+{% block welcome %}
+{% endblock welcome %}
+{%block navbar%}{%endblock navbar%}
+{% block body%}
+<div class="container my-2">
+   <div class="d-flex justify-content-between align-items-center mb-3">
+     <h1>Applicants</h1>
+     <a href="{{ url_for('company_dashboard') }}" class="btn btn-primary">
+         Back
+       </a>
+   </div>
+   <h3>Job Title:{{drive.jtitle}}</h3>
+  <table class="table table-borderless">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Department</th>
+        <th scope="col">CGPA</th>
+        <th scope="col">Resume</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for application in applications %}
+        <tr class="align-middle me-auto">
+        <td>{{application.student.id}}</td>
+        <td>{{application.student.user.name}}</td>
+        <td>{{application.student.sdept}}</td>
+        <td>{{application.student.scgpa}}</td>
+        <td>
+        <a href="{{ url_for('view_resume', student_id=application.student.id) }}" class="btn btn-primary btn-sm">
+        View Resume
+      </a>
+        </td>
+        {% if application.status=="shortlisted" %}
+           <td class="text-info">Shortlisted</td>
+        {% elif application.status=="selected" %}
+           <td class="text-success">Selected</td>
+         {% elif application.status=="rejected" %}
+           <td class="text-danger">Rejected</td>
+        {% else %}
+          <td class="text-secondary">Applied</td>
+        {% endif %}
+        <td>
+          <a href="{{ url_for('shortlist_app', drive_id=drive.id, student_id=application.student.id) }}" 
+   class="btn btn-info btn-sm me-2">
+  Shortlist
+      </a>
+      <a href="{{ url_for('select_app', drive_id=drive.id, student_id=application.student.id) }}" 
+   class="btn btn-success btn-sm me-2">
+  Select
+      </a>
+          <a href="{{ url_for('reject_app', drive_id=drive.id, student_id=application.student.id) }}" 
+   class="btn btn-danger btn-sm me-2">
+  Reject
+      </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+{%endblock body%}

@@ -1,0 +1,39 @@
+{% extends 'admin_base.html' %}
+
+{% block title %}Drive 1{% endblock title %}
+
+{% block navbar %}{% endblock navbar %}
+{% block searchbar %}{% endblock searchbar %}
+
+{% block body %}
+
+<div class="container mt-5">
+  <div class="card p-4 shadow">
+
+    <h1>Job Title:{{drive.jtitle}}</h1>
+    <br>
+    <div class="row align-items-center">
+      
+      <div class="col-md-7 col-lg-5">
+        <h4>Company: {{drive.company.user.name}}</h4>
+        <h4>Job Description</h4>
+        <p>{{drive.jdesc}}</p>
+        <h4>Location: {{drive.location}}</h4>
+        <h4>Salary: {{drive.salary}}</h4>
+        <h4>Deadline: {{drive.deadline}}</h4>
+        <div class="mt-4">
+          {% if current_user.role=="admin" %}
+          <a class="btn btn-outline-primary" href="{{ url_for('admin_drives') }}">Back</a>
+          {% elif current_user.role=="company" %}
+          <a class="btn btn-outline-primary" href="{{ url_for('company_dashboard') }}">Back</a>
+          {% elif current_user.role=="student" %}
+          <a class="btn btn-outline-primary" href="{{ url_for('student_dashboard') }}">Back</a>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

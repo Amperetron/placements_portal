@@ -1,0 +1,48 @@
+{% extends 'admin_base.html' %}
+{% block title %}Companies{% endblock title %}
+{% block body %}
+<div class="container my-2">
+  <h1>Registered Companies</h1>
+<table class="table table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">S No</th>
+      <th scope="col">Company</th>
+      <th scope="col">Website</th>
+      <th scope="col">HR Contact No</th>
+      <th scope="col">Status</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for company in companies %}
+  <tr>
+    <td>{{ loop.index }}</td>
+    <td>{{ company.user.name }}</td>
+    <td>{{company.cwebsite}}</td>
+    <td>{{company.hrcontact}}</td>
+    <td>
+{% if company.user.is_approved %}
+<span class="text-success">Approved</span>
+{% elif company.user.is_blacklisted %}
+<span class="text-danger">Rejected</span>
+{% else %}
+<span class="text-secondary">Pending</span>
+{% endif %}
+</td>
+    <td>
+      <a class="btn btn-success btn-sm me-2"
+         href="{{ url_for('approve_company', id=company.user.id) }}">
+         Approve
+      </a>
+      <a class="btn btn-danger btn-sm"
+           href="{{ url_for('blacklist_company', id=company.user.id) }}">
+           Blacklist
+      </a>
+    </td>
+  </tr>
+  {% endfor %}
+</tbody>
+</table>
+</div>
+{% endblock body %}

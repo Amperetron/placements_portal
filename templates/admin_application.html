@@ -1,0 +1,40 @@
+{% extends 'admin_base.html' %}
+{% block title %}Applications{% endblock title %}
+{% block body %}
+<div class="container my-2">
+  <h1>Student Applications</h1>
+<table class="table table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Job Title</th>
+      <th scope="col">Company</th>
+      <th scope="col">Applied Date</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for application in applications  %}
+    <tr class="align-middle">
+    <td>{{ application.student.id }}</td>
+    <td>{{application.student.user.name}}</td>
+    <td>{{application.job.jtitle}}</td>
+    <td>{{application.job.company.user.name}}</td>
+    <td>{{application.application_date}}</td>
+    {% if application.status=="shortlisted" %}
+      <td class="text-info">Shortlisted</td>
+    {% elif application.status=="rejected" %}
+      <td class="text-danger">Rejected</td>
+    {% elif application.status=="selected" %}
+      <td class="text-success">Selected</td>
+    {% else %}
+    <td class="text-secondary">Applied</td>
+    {% endif %}
+  </tr>
+    {% endfor %}
+  
+</tbody>
+</table>
+</div>
+{% endblock body %}

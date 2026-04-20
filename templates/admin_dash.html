@@ -1,0 +1,52 @@
+{% extends 'admin_base.html' %}
+{% block title %}Dashboard{% endblock title %}
+{% block searchbar %}
+{% endblock searchbar %}
+
+{% block body %}
+
+<div class="container my-4">
+
+  <div class="row g-3">
+
+    <div class="col-md-6">
+      <div class="card shadow text-center h-100">
+        <div class="card-body d-flex flex-column justify-content-center">
+          <h3>Total Students</h3>
+          <h1>{{ students|length }}</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow text-center h-100">
+        <div class="card-body d-flex flex-column justify-content-center">
+          <h3>Total Companies</h3>
+          <h1>{{ companies|length }}</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow text-center h-100">
+        <div class="card-body d-flex flex-column justify-content-center">
+          <h3>Total Applications</h3>
+          <h1>{{ applications|length }}</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow text-center h-100">
+        <div class="card-body d-flex flex-column justify-content-center">
+          <h3>Total Drives</h3>
+          <h1>{{ drives|length }}</h1>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock body %}
