@@ -1,4 +1,4 @@
-# 🎓 Placement Portal Application
+# Placement Portal Application
 The Goal of this project was to develop a web-based platform that streamlines and manages campus recruitment activities for institutes, companies, and students.
 
 ```NOTE
@@ -7,7 +7,7 @@ This project is just a prototype and not under active development
 
 ---
 
-## 📌 Problem Statement
+## Problem Statement
 
 Many institutes still rely on spreadsheets, emails, or manual processes to manage placement activities. This leads to:
 
@@ -19,28 +19,28 @@ Many institutes still rely on spreadsheets, emails, or manual processes to manag
 This project aims to build a centralized system to solve these issues efficiently.
 ---
 
-## 💡 Solution
+## Solution
 
 The **Placement Portal Application** is a role-based web system that connects:
 
-- 🏫 Admin (Institute Placement Cell)  
-- 🏢 Companies  
-- 🎓 Students  
+-  Admin (Institute Placement Cell)  
+-  Companies  
+-  Students  
 
 It automates placement workflows including company approvals, job postings, student applications, and recruitment tracking.
 
 ---
 
-## 🧠 Core Features
+## Core Features
 
-### 🔐 Authentication
+### Authentication
 - Role-based login system (Admin, Company, Student)
 - Registration allowed for Company and Student
 - Admin is pre-defined (no registration)
 
 ---
 
-### 🏫 Admin Functionalities
+### Admin Functionalities
 - Approve/reject company registrations  
 - Approve/reject placement drives  
 - View all students, companies, and applications  
@@ -68,7 +68,7 @@ It automates placement workflows including company approvals, job postings, stud
 
 ---
 
-### 🎓 Student Functionalities
+### Student Functionalities
 - Register and manage profile  
 - Upload resume  
 - View approved placement drives  
@@ -78,7 +78,7 @@ It automates placement workflows including company approvals, job postings, stud
 
 ---
 
-## ⚙️ Additional Functionalities
+## Additional Functionalities
 
 - Prevent duplicate applications  
 - Only approved companies can create drives  
@@ -87,7 +87,7 @@ It automates placement workflows including company approvals, job postings, stud
 - Admin access to all historical data  
 ---
 
-## 🏗️ Tech Stack
+## Tech Stack
 
 **Backend:**
 - Flask  
@@ -103,7 +103,7 @@ It automates placement workflows including company approvals, job postings, stud
 
 ---
 
-## 🧪 Installation & Setup
+## Installation & Setup
 
 ```bash
 # Clone repository
@@ -114,6 +114,7 @@ cd placement-portal
 
 # Install dependencies
 pip install -r requirements.txt
+```
 
 # Run the application
 python app.py
